@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Image</title>
+    <style>
+        h4 {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Image for OCR</h1>
+    <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+
+    <h4>Recommended Purchase Dates</h4>
+    <ul>
+        {% for recommendation in recommendations %}
+            <li>{{ recommendation }}</li>
+        {% endfor %}
+    </ul>
+
+    <h4>분류별 금액 합계 (최근 3개월)</h4>
+    <img src="data:image/png;base64,{{ chart_data }}" alt="Chart">
+
+    <h4>가장 많이 구매한 품목 5가지</h4>
+    <ul>
+        {% for item in top_items_list %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

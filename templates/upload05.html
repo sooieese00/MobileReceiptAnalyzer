@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>모바일 영수증&#129534; 분석 서비스</title>
+    <style>
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h3 {
+            color: #555;
+            text-align: center;
+        }
+        h5 {
+            color: #999;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 10px; /* 간격 조정을 위한 추가 */
+        }
+        h4 {
+            color: #444;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .left-column, .right-column {
+            flex: 1;
+            padding: 20px;
+            background: #f9f9f9;
+            margin: 10px;
+        }
+        .left-column {
+            margin-right: 5px;
+        }
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            margin-left: 5px;
+        }
+        ul {
+            padding: 0;
+            list-style-type: none;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        input[type="submit"]:hover {
+            background: #0056b3;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>&#129534;모바일 영수증 분석 서비스</h1>
+    <h3>여기에 영수증을 업로드해주세요</h3>
+    <h5>※ 영수증은 날짜부터 나오도록 캡쳐해주세요 ※</h5>
+    <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+
+    <div class="container">
+        <div class="left-column">
+            <h3> &#10004; 최근 3개월 간 카테고리별 소비 현황</h3>
+            <img src="data:image/png;base64,{{ chart_data }}" alt="Chart">
+        </div>
+        <div class="right-column">
+            <div>
+                <h3> &#10004; 최근 3개월 간 가장 많이 구입한 품목 5가지</h3>
+                <ul>
+                    {% for item in top_items_list %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div>
+                <h3> &#10004; 구매주기 추천</h3>
+                <ul>
+                    {% for recommendation in recommendations %}
+                        <li>{{ recommendation }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
