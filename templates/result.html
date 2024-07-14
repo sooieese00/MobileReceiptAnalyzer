@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OCR Result</title>
+</head>
+<body>
+    <h1>OCR Text Result</h1>
+    <p>Extracted Data:</p>
+    <ul>
+        {% for item in data %}
+        <li>품목: {{ item['품목'] }} - 단가: {{ item['단가'] }}, 수량: {{ item['수량'] }}, 금액: {{ item['금액'] }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Try another image</a>
+</body>
+</html>

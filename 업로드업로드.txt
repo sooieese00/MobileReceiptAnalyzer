@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Image</title>
+    <style>
+        h4 {
+            color: blue;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between; /* 내용을 양쪽에 나누어 정렬 */
+        }
+        .left-column, .right-column {
+            flex: 1; /* 각 컬럼이 사용 가능한 공간의 절반을 차지 */
+            padding: 20px;
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+            background: #f9f9f9;
+            margin: 10px;
+        }
+        .left-column {
+            margin-right: 5px; /* 오른쪽 컬럼과의 간격 조정 */
+        }
+        .right-column {
+            display: flex;
+            flex-direction: column; /* 내부 항목을 세로로 정렬 */
+            justify-content: start;
+            margin-left: 5px; /* 왼쪽 컬럼과의 간격 조정 */
+        }
+        ul {
+            padding: 0;
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Image for OCR</h1>
+    <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+
+    <div class="container">
+        <div class="left-column">
+            <h4>최근 3개월 간 분류별 소비 현황입니다</h4>
+            <img src="data:image/png;base64,{{ chart_data }}" alt="Chart">
+        </div>
+        <div class="right-column">
+            <div>
+                <h4>최근 3개월 간 가장 많이 구입한 품목 5가지를 뽑아봤어요!</h4>
+                <ul>
+                    {% for item in top_items_list %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div>
+                <h4>구매주기를 추천할게요</h4>
+                <ul>
+                    {% for recommendation in recommendations %}
+                        <li>{{ recommendation }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
