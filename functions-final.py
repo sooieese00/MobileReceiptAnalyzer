@@ -352,9 +352,7 @@ def download_excel():
             for cell in row:
                 cell.font = bold_font
                 cell.fill = fill_color
-        
-        # C35에 "과일" 입력
-        ws['c27'] = '과일'
+
         
         # 스타일 적용된 파일 저장
         wb.save(temp_filepath)
